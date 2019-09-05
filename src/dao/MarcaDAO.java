@@ -40,7 +40,25 @@ public class MarcaDAO implements IDAO_T<Marca> {
 
     @Override
     public String atualizar(Marca o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = ""
+                    + "UPDATE marca "
+                    + "SET "
+                    + "nome = '" + o.getNome() + "',"
+                    + "status = '" + o.getStatus()+ "' "
+                    + "WHERE id = " + o.getId();
+
+            System.out.println("sql: " + sql);
+
+            int resultado = st.executeUpdate(sql);
+
+            return null;
+        } catch (Exception e) {
+            System.out.println("Erro atualizar marca    = " + e);
+            return e.toString();
+        }
     }
 
     @Override
