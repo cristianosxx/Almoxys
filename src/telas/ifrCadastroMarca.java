@@ -41,14 +41,14 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         btnFechar5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         txtConsultarNome = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnFechar4 = new javax.swing.JButton();
+        chbMostrar = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         txtNome2 = new javax.swing.JFormattedTextField();
@@ -84,7 +84,7 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,14 +107,6 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Cadastrar", jPanel1);
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Código");
-        jRadioButton1.setToolTipText("");
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Nome");
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -153,41 +145,51 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
             }
         });
 
+        chbMostrar.setText("Mostrar inativos");
+        chbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbMostrarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nome");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtConsultarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnFechar4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFechar4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtConsultarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(chbMostrar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
                     .addComponent(txtConsultarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(chbMostrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +238,7 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,7 +335,18 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
                 // MENSAGEM PARA O USUÁRIO
                 JOptionPane.showMessageDialog(null, "O registro foi salvo com sucesso!");
                 // ATUALIZANDO A TABELA COM O DADO NOVO
-                new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText());
+                
+                String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+                
+                new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
                 
             }else{
                 //MENSAGEM DE ERRO
@@ -343,7 +356,16 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText());
+        String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+        new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSalvarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEditActionPerformed
@@ -371,7 +393,17 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
         if(retorno == null){
             JOptionPane.showMessageDialog(null, "O registro foi editado com sucesso!");
             
-            new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText());
+            String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+            
+            new MarcaDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
             // MUDA A AVA DA TELA
             jTabbedPane1.setSelectedIndex(1);
         }else{
@@ -386,6 +418,10 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chbAtivoActionPerformed
 
+    private void chbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbMostrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbMostrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -396,14 +432,14 @@ public class ifrCadastroMarca extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvarEdit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chbAtivo;
+    private javax.swing.JCheckBox chbMostrar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;

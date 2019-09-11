@@ -106,7 +106,7 @@ public class MarcaDAO implements IDAO_T<Marca> {
         return g;
     }
     
-    public void popularTabela(JTable tabela, String criterio) {
+    public void popularTabela(JTable tabela, String criterio, String mostrarAtivo) {
         // dados da tabela
         Object[][] dadosTabela = null;
 
@@ -119,7 +119,7 @@ public class MarcaDAO implements IDAO_T<Marca> {
         // cria matriz de acordo com nº de registros da tabela
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + "SELECT count(*) FROM marca WHERE nome ILIKE '%" + criterio + "%'");
+                    + "SELECT count(*) FROM marca WHERE nome ILIKE '%" + criterio + "%' "+mostrarAtivo+" ");
 
             resultadoQ.next();
 
@@ -134,14 +134,19 @@ public class MarcaDAO implements IDAO_T<Marca> {
         // efetua consulta na tabela
         try {
             resultadoQ = ConexaoBD.getInstance().getConnection().createStatement().executeQuery(""
-                    + "SELECT * FROM marca WHERE NOME ILIKE '%" + criterio + "%' "
-                    + "ORDER BY nome");
+                    + "SELECT * FROM marca WHERE NOME ILIKE '%" + criterio + "%' "+mostrarAtivo+" "
+                    + "ORDER BY status desc,nome");
 
             while (resultadoQ.next()) {
-
+                String stat;
                 dadosTabela[lin][0] = resultadoQ.getInt("id");
                 dadosTabela[lin][1] = resultadoQ.getString("nome");
-                dadosTabela[lin][2] = resultadoQ.getString("status");
+                if(resultadoQ.getString("status").equals("1")){
+                    stat = "Ativo";
+                }else {
+                    stat = "Inativo";
+                }
+                dadosTabela[lin][2] = stat;
 
 
                 // caso a coluna precise exibir uma imagem
