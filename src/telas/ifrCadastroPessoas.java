@@ -20,6 +20,7 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
     /**
      * Creates new form ifrCadastroPesoas
      */
+    int codigo = 0;
     public ifrCadastroPessoas() {
         initComponents();
         jTabbedPane1.setEnabledAt(2, false);
@@ -80,7 +81,6 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
 
         setResizable(true);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Código*");
@@ -89,7 +89,7 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
         jLabel2.setText("Nome*");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Emai*");
+        jLabel3.setText("Email*");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Nascimento*");
@@ -133,7 +133,7 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                             .addComponent(txtNascimento)
                             .addComponent(txtCPF)
                             .addComponent(txtTelefone)
@@ -150,9 +150,9 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -220,12 +220,17 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
         });
 
         buttonGroup1.add(radCodigo);
-        radCodigo.setSelected(true);
         radCodigo.setText("Código");
         radCodigo.setToolTipText("");
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setSelected(true);
         jRadioButton2.setText("Nome");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         chbMostrar.setText("Mostrar inativos");
 
@@ -235,13 +240,14 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(radCodigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radCodigo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtConsultarNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -252,8 +258,7 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnEditar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar2))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE))
+                                .addComponent(btnFechar2)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -305,6 +310,11 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Fechar");
@@ -331,7 +341,7 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEditEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                            .addComponent(txtEditEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                             .addComponent(txtEditNascimento)
                             .addComponent(txtEditCPF)
                             .addComponent(txtEditTelefone)
@@ -452,6 +462,7 @@ this.dispose();           // TODO add your handling code here:
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String mostrar;
         String filtro;
+        int checkpesquisa = 0;
         if(!chbMostrar.isSelected()){
             // BOX SELECIONADA = ITEM ATIVO = 1
            mostrar = " AND status = 1";
@@ -462,15 +473,110 @@ this.dispose();           // TODO add your handling code here:
         }
         if(radCodigo.isSelected()){
             filtro = "codigo";
+            checkpesquisa = 1;
         }else{
             filtro = "nome";
+            checkpesquisa = 2;
         }
-        new PessoaDAO().popularTabela(tblPessoa, txtConsultarNome.getText(),mostrar,filtro);
+        if(checkpesquisa == 1){
+            new PessoaDAO().popularTabelaCodigo(tblPessoa, txtConsultarNome.getText(), mostrar);
+        }
+        if(checkpesquisa == 2){
+        new PessoaDAO().popularTabela(tblPessoa, txtConsultarNome.getText(),mostrar);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        String idString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+        
+        Pessoa pessoa = new PessoaDAO().consultarId(id);
+        
+        if(pessoa == null){
+            JOptionPane.showMessageDialog(null, "Pessoa não localizada!");
+        }else{
+            codigo = pessoa.getId();
+            
+            jTabbedPane1.setSelectedIndex(2);
+            
+            txtEditCodigo.setText(String.valueOf(pessoa.getCodigo()));
+            txtEditNome.setText(pessoa.getNome());
+            txtEditEmail.setText(pessoa.getEmail());
+            txtEditNascimento.setText(pessoa.getNascimento());
+            txtEditCPF.setText(pessoa.getCpf());
+            txtEditTelefone.setText(pessoa.getTelefone());
+            
+            if(pessoa.getStatus()==1){
+                chbAtivo.setSelected(true);
+            }else{
+                chbAtivo.setSelected(false);
+            }
+        }
+    
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Pessoa pessoa = new Pessoa();
+        
+        pessoa.setId(codigo);
+        pessoa.setCodigo(Integer.parseInt(txtEditCodigo.getText()));
+        pessoa.setNome(txtEditNome.getText());
+        pessoa.setEmail(txtEditEmail.getText());
+        pessoa.setNascimento(txtEditNascimento.getText());
+        pessoa.setCpf(txtEditCPF.getText());
+        pessoa.setTelefone(txtEditTelefone.getText());
+        
+        if(chbAtivo.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+            pessoa.setStatus(1);
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            pessoa.setStatus(0);  
+        }
+        ///
+        PessoaDAO dao = new PessoaDAO();
+        
+        String retorno = null;
+        
+        // TENTATIVA DE EDITAR EM BANCO
+        retorno = dao.atualizar(pessoa);
+        
+        if(retorno == null){
+            JOptionPane.showMessageDialog(null, "O registro foi editado com sucesso!");
+        }
+        
+        String mostrar;
+        String filtro;
+        int checkpesquisa = 0;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+        if(radCodigo.isSelected()){
+            filtro = "codigo";
+            checkpesquisa = 1;
+        }else{
+            filtro = "nome";
+            checkpesquisa = 2;
+        }
+        if(checkpesquisa == 1){
+            new PessoaDAO().popularTabelaCodigo(tblPessoa, txtConsultarNome.getText(), mostrar);
+        }
+        if(checkpesquisa == 2){
+        new PessoaDAO().popularTabela(tblPessoa, txtConsultarNome.getText(),mostrar);
+        }
+            jTabbedPane1.setSelectedIndex(1);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
