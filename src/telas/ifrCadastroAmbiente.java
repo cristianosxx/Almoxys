@@ -5,12 +5,18 @@
  */
 package telas;
 
+import dao.AmbienteDAO;
+import dao.MarcaDAO;
+import javax.swing.JOptionPane;
+import tabelas.Ambiente;
+import tabelas.Marca;
+
 /**
  *
  * @author cristiano.sommer
  */
 public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
-
+    int codigo = 0;
     /**
      * Creates new form ifrCadastroPesoas
      */
@@ -32,11 +38,9 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JFormattedTextField();
-        txtNome = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        txtNome1 = new javax.swing.JFormattedTextField();
+        btnSalvar = new javax.swing.JButton();
         btnFechar7 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -47,28 +51,24 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         jTable2 = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnFechar6 = new javax.swing.JButton();
+        chbMostrar = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        txtCodigo1 = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtNome1 = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
+        txtNome2 = new javax.swing.JFormattedTextField();
+        btnSalvarEdit = new javax.swing.JButton();
         chbAtivo = new javax.swing.JCheckBox();
         btnFechar5 = new javax.swing.JButton();
 
         setResizable(true);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Código*");
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Nome*");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -85,19 +85,15 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addComponent(txtCodigo)))
+                        .addComponent(txtNome1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 530, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(540, Short.MAX_VALUE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFechar7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -105,17 +101,13 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(157, 157, 157)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -132,6 +124,11 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,6 +159,13 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
             }
         });
 
+        chbMostrar.setText("Mostrar invativos");
+        chbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbMostrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -176,6 +180,8 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
                         .addComponent(jRadioButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtConsultarNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chbMostrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -193,10 +199,11 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(txtConsultarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(chbMostrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,22 +212,29 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Consultar", jPanel2);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Código*");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Nome*");
 
-        txtNome1.addActionListener(new java.awt.event.ActionListener() {
+        txtNome2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNome1ActionPerformed(evt);
+                txtNome2ActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Salvar");
+        btnSalvarEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSalvarEdit.setText("Salvar");
+        btnSalvarEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarEditActionPerformed(evt);
+            }
+        });
 
         chbAtivo.setText("Cadastro Ativo");
+        chbAtivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbAtivoActionPerformed(evt);
+            }
+        });
 
         btnFechar5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnFechar5.setText("Fechar");
@@ -235,23 +249,18 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNome1))
+                        .addComponent(txtNome2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 530, Short.MAX_VALUE)
+                        .addContainerGap(540, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chbAtivo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalvarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFechar5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -259,19 +268,15 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(157, 157, 157)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addComponent(chbAtivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvarEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -282,18 +287,37 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        String idString = String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+        
+        Ambiente ambiente = new AmbienteDAO().consultarId(id);
+        
+        if(ambiente == null){
+            JOptionPane.showMessageDialog(null, "Ambiente não localizada!");
+        }else{
+            codigo = ambiente.getId();
+            
+            jTabbedPane1.setSelectedIndex(2);
+            
+            txtNome2.setText(ambiente.getNome());
+        
+        if(ambiente.getStatus()==1){
+            chbAtivo.setSelected(true);
+        }else{
+            chbAtivo.setSelected(false);   
+        }
+        }        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnFechar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar5ActionPerformed
@@ -308,13 +332,123 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnFechar7ActionPerformed
 
-    private void txtNome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome1ActionPerformed
+    private void txtNome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNome2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNome1ActionPerformed
+    }//GEN-LAST:event_txtNome2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        int restricao = 0;
+        //ADICIONEM AS RESTRIÇÕES AQUI::
+        
+        
+        
+        
+        if(restricao == 0){
+            Ambiente ambiente = new Ambiente();
+            // CRIEI UMA INSTANCIA DA TABELA PARA COLOCAR OS DADOS
+            ambiente.setNome(txtNome1.getText());
+            
+            // CRIEI UMA INSTANCIA DO DAO
+            AmbienteDAO dao = new AmbienteDAO();
+            
+            // STRING PARA INDICAR ERROS
+            String retorno = null;
+            
+            // SALVANDO NO BANCO
+            retorno = dao.salvar(ambiente);
+            
+            if(retorno == null){
+                // ESVAZIANDO A TEXTBOX
+                txtNome1.setText("");
+                // MENSAGEM PARA O USUÁRIO
+                JOptionPane.showMessageDialog(null, "O registro foi salvo com sucesso!");
+                // ATUALIZANDO A TABELA COM O DADO NOVO
+                
+                String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+                
+                new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
+                
+            }else{
+                //MENSAGEM DE ERRO
+                JOptionPane.showMessageDialog(null, "Erro ao salvar no banco de dados!");
+            }
+        }
+                                            
+
+       // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void chbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbAtivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_chbAtivoActionPerformed
+
+    private void chbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbMostrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbMostrarActionPerformed
+
+    private void btnSalvarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEditActionPerformed
+        Ambiente ambiente = new Ambiente();
+        
+        ambiente.setId(codigo);
+        ambiente.setNome(txtNome2.getText());
+        
+        if(chbAtivo.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+            ambiente.setStatus(1);
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            ambiente.setStatus(0);  
+        }
+        ///
+        AmbienteDAO dao = new AmbienteDAO();
+        
+        String retorno = null;
+        
+        // TENTATIVA DE EDITAR EM BANCO
+        retorno = dao.atualizar(ambiente);
+        
+        if(retorno == null){
+            JOptionPane.showMessageDialog(null, "O registro foi editado com sucesso!");
+            
+            String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+            
+            new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
+            // MUDA A AVA DA TELA
+            jTabbedPane1.setSelectedIndex(1);
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar!");
+        }
+    }//GEN-LAST:event_btnSalvarEditActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+        new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -323,13 +457,12 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFechar5;
     private javax.swing.JButton btnFechar6;
     private javax.swing.JButton btnFechar7;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSalvarEdit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chbAtivo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JCheckBox chbMostrar;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -339,10 +472,8 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JFormattedTextField txtCodigo1;
     private javax.swing.JTextField txtConsultarNome;
-    private javax.swing.JFormattedTextField txtNome;
     private javax.swing.JFormattedTextField txtNome1;
+    private javax.swing.JFormattedTextField txtNome2;
     // End of variables declaration//GEN-END:variables
 }
