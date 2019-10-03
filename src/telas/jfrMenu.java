@@ -5,6 +5,8 @@
  */
 package telas;
 
+import dao.UsuarioDAO;
+import java.awt.Graphics;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +14,17 @@ import javax.swing.JOptionPane;
  * @author cristiano.sommer
  */
 public class jfrMenu extends javax.swing.JFrame {
-
-    /**
-     * Creates new form jfrMenu
-     */
+    final int logadoadmin = 2;
+    final int logado = 1;
+    final int deslogado = 0;
+    int login = deslogado;
+    
     public jfrMenu() {
         initComponents();
         this.setTitle("Almoxys");
         this.setExtendedState(MAXIMIZED_BOTH);
+        panelUser.setVisible(false);
+       
     }
 
     /**
@@ -33,6 +38,15 @@ public class jfrMenu extends javax.swing.JFrame {
 
         jMenu5 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        panelLogin = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtLoginNome = new javax.swing.JTextField();
+        txtLoginSenha = new javax.swing.JPasswordField();
+        txtLoginEntrar = new javax.swing.JButton();
+        panelUser = new javax.swing.JPanel();
+        txtNomeUsuario = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -53,15 +67,101 @@ public class jfrMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setText("Nome");
+
+        jLabel2.setText("Senha");
+
+        txtLoginEntrar.setText("Entrar");
+        txtLoginEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoginEntrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
+        panelLogin.setLayout(panelLoginLayout);
+        panelLoginLayout.setHorizontalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLoginNome, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(txtLoginSenha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtLoginEntrar)
+                .addGap(2, 2, 2))
+        );
+        panelLoginLayout.setVerticalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLoginNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(16, 16, 16)
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addComponent(txtLoginEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        txtNomeUsuario.setEditable(false);
+        txtNomeUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeUsuarioActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Deslogar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
+        panelUser.setLayout(panelUserLayout);
+        panelUserLayout.setHorizontalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtNomeUsuario)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        panelUserLayout.setVerticalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jDesktopPane1.setLayer(panelLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(panelUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(729, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 416, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Cadastros");
@@ -171,7 +271,10 @@ public class jfrMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ifrCadastroPessoas ifrCadastroPessoas = new ifrCadastroPessoas();
+        
+        
+        if(login == logadoadmin){
+            ifrCadastroPessoas ifrCadastroPessoas = new ifrCadastroPessoas();
         jDesktopPane1.add(ifrCadastroPessoas);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -182,10 +285,15 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrCadastroPessoas.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrCadastroPessoas.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        ifrCadastroItem ifrCadastroItem = new ifrCadastroItem();
+        
+        if(login == logadoadmin){
+         ifrCadastroItem ifrCadastroItem = new ifrCadastroItem();
         jDesktopPane1.add(ifrCadastroItem);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -195,11 +303,16 @@ public class jfrMenu extends javax.swing.JFrame {
 
         ifrCadastroItem.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
-        ifrCadastroItem.setVisible(true);
+        ifrCadastroItem.setVisible(true);   
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ifrRetirada ifrRetirada = new ifrRetirada();
+        
+        if(login == logadoadmin){
+            ifrRetirada ifrRetirada = new ifrRetirada();
         jDesktopPane1.add(ifrRetirada);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -210,6 +323,9 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrRetirada.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrRetirada.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
@@ -221,7 +337,9 @@ public class jfrMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        ifrCadastroEstoque ifrCadastroEstoque = new ifrCadastroEstoque();
+        
+        if(login == logadoadmin){
+            ifrCadastroEstoque ifrCadastroEstoque = new ifrCadastroEstoque();
         jDesktopPane1.add(ifrCadastroEstoque);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -232,10 +350,15 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrCadastroEstoque.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrCadastroEstoque.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ifrCadastroDepartamento ifrCadastroDepartamento = new ifrCadastroDepartamento();
+        
+        if(login == logadoadmin){
+            ifrCadastroDepartamento ifrCadastroDepartamento = new ifrCadastroDepartamento();
         jDesktopPane1.add(ifrCadastroDepartamento);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -246,10 +369,15 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrCadastroDepartamento.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrCadastroDepartamento.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        ifrCadastroMarca ifrCadastroMarca = new ifrCadastroMarca();
+        
+        if(login == logadoadmin){
+            ifrCadastroMarca ifrCadastroMarca = new ifrCadastroMarca();
         jDesktopPane1.add(ifrCadastroMarca);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -260,10 +388,15 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrCadastroMarca.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrCadastroMarca.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        ifrCadastroAmbiente ifrCadastroAmbiente = new ifrCadastroAmbiente();
+        
+        if(login == logadoadmin){
+            ifrCadastroAmbiente ifrCadastroAmbiente = new ifrCadastroAmbiente(1);
         jDesktopPane1.add(ifrCadastroAmbiente);
         
         int lDesk = jDesktopPane1.getWidth();
@@ -274,7 +407,30 @@ public class jfrMenu extends javax.swing.JFrame {
         ifrCadastroAmbiente.setLocation(lDesk / 2 - lIFrame / 2, aDesk / 2 - aIFrame / 2);
         
         ifrCadastroAmbiente.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário estar logado como administrador.");
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void txtLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginEntrarActionPerformed
+        if (new UsuarioDAO().autenticar(txtLoginNome.getText(), txtLoginSenha.getText())) {
+        login = logadoadmin;
+        panelLogin.setVisible(false);
+        panelUser.setVisible(true);
+        txtNomeUsuario.setText(txtLoginNome.getText());
+         
+        } else {
+            JOptionPane.showMessageDialog(null, "login ou senha bugado.");
+        }
+    }//GEN-LAST:event_txtLoginEntrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,7 +468,10 @@ public class jfrMenu extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -329,5 +488,11 @@ public class jfrMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel panelLogin;
+    private javax.swing.JPanel panelUser;
+    private javax.swing.JButton txtLoginEntrar;
+    private javax.swing.JTextField txtLoginNome;
+    private javax.swing.JPasswordField txtLoginSenha;
+    private javax.swing.JTextField txtNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }

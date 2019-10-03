@@ -17,14 +17,22 @@ import tabelas.Marca;
  */
 public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
     int codigo = 0;
+    int editar;
     /**
      * Creates new form ifrCadastroPesoas
      */
-    public ifrCadastroAmbiente() {
+    public ifrCadastroAmbiente(int o) {
         initComponents();
         jTabbedPane1.setEnabledAt(2, false);
         this.setTitle("Cadastro Ambiente");
+        if(o == 2){
+            btnEditar.setText("Selecionar");
+            editar = o;
+        }else{
+            editar = 1;
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,11 +130,26 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Nome");
 
+        txtConsultarNome.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtConsultarNomeCaretUpdate(evt);
+            }
+        });
+
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseReleased(evt);
             }
         });
 
@@ -141,6 +164,16 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable2PropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable2);
 
         btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -160,6 +193,11 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         });
 
         chbMostrar.setText("Mostrar invativos");
+        chbMostrar.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chbMostrarStateChanged(evt);
+            }
+        });
         chbMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chbMostrarActionPerformed(evt);
@@ -186,7 +224,7 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFechar6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -202,8 +240,8 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(chbMostrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -298,6 +336,7 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if(editar==1){
         String idString = String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 0));
         int id = Integer.parseInt(idString);
         
@@ -317,9 +356,18 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         }else{
             chbAtivo.setSelected(false);   
         }
-        }        
+        }
+        
+       }   
+        if(editar==2){
+            String idString = String.valueOf(jTable2.getValueAt(jTable2.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+        
+        Ambiente ambiente = new AmbienteDAO().consultarId(id);
+        }
+        
     }//GEN-LAST:event_btnEditarActionPerformed
-
+    
     private void btnFechar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar5ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnFechar5ActionPerformed
@@ -450,6 +498,48 @@ public class ifrCadastroAmbiente extends javax.swing.JInternalFrame {
         new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void jScrollPane1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseReleased
+       
+    }//GEN-LAST:event_jScrollPane1MouseReleased
+
+    private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
+
+    }//GEN-LAST:event_jTable2PropertyChange
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+       
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void txtConsultarNomeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtConsultarNomeCaretUpdate
+        String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+        new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
+    }//GEN-LAST:event_txtConsultarNomeCaretUpdate
+
+    private void chbMostrarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chbMostrarStateChanged
+        String mostrar;
+        if(!chbMostrar.isSelected()){
+            // BOX SELECIONADA = ITEM ATIVO = 1
+           mostrar = " AND status = 1";
+            
+        }else{
+            // BOX NÃO SELECIONADA = ITEM NÃO ATIVO = 0
+            mostrar = "" ;
+        }
+        new AmbienteDAO().popularTabela(jTable2, txtConsultarNome.getText(),mostrar);
+    }//GEN-LAST:event_chbMostrarStateChanged
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
