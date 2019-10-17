@@ -5,6 +5,7 @@
  */
 package telas;
 
+import apoio.Formatacao;
 import dao.MarcaDAO;
 import dao.PessoaDAO;
 import javax.swing.JOptionPane;
@@ -25,6 +26,10 @@ public class ifrCadastroPessoas extends javax.swing.JInternalFrame {
         initComponents();
         jTabbedPane1.setEnabledAt(2, false);
         this.setTitle("Cadastro Pessoas");
+        Formatacao.formatarCpf(txtCPF);
+        Formatacao.formatarData(txtNascimento);
+        Formatacao.formatarCpf(txtEditCPF);
+        Formatacao.formatarData(txtEditNascimento);
     }
 
     /**
@@ -436,7 +441,7 @@ this.dispose();           // TODO add your handling code here:
             pessoa.setNome(txtNome.getText());
             pessoa.setEmail(txtEmail.getText());
             pessoa.setNascimento(txtNascimento.getText());
-            pessoa.setCpf(txtCPF.getText());
+            pessoa.setCpf(Formatacao.removerFormatacao(txtCPF.getText()));
             pessoa.setTelefone(txtTelefone.getText());
             
             // CRIEI UMA INSTANCIA DO DAO
@@ -505,7 +510,7 @@ this.dispose();           // TODO add your handling code here:
             txtEditCodigo.setText(String.valueOf(pessoa.getCodigo()));
             txtEditNome.setText(pessoa.getNome());
             txtEditEmail.setText(pessoa.getEmail());
-            txtEditNascimento.setText(pessoa.getNascimento());
+            txtEditNascimento.setText(Formatacao.ajustaDataDMA(pessoa.getNascimento()));
             txtEditCPF.setText(pessoa.getCpf());
             txtEditTelefone.setText(pessoa.getTelefone());
             
@@ -529,8 +534,8 @@ this.dispose();           // TODO add your handling code here:
         pessoa.setCodigo(Integer.parseInt(txtEditCodigo.getText()));
         pessoa.setNome(txtEditNome.getText());
         pessoa.setEmail(txtEditEmail.getText());
-        pessoa.setNascimento(txtEditNascimento.getText());
-        pessoa.setCpf(txtEditCPF.getText());
+        pessoa.setNascimento((txtEditNascimento.getText()));
+        pessoa.setCpf(Formatacao.removerFormatacao(txtEditCPF.getText()));
         pessoa.setTelefone(txtEditTelefone.getText());
         
         if(chbAtivo.isSelected()){

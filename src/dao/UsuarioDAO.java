@@ -55,7 +55,7 @@ public class UsuarioDAO implements IDAO_T<Usuario> {
             Statement st = ConexaoBD.getInstance().getConnection().createStatement();
 
             String sql = ""
-                    + "select * from usuariosup "
+                    + "select * from usuario "
                     + "where  "
                     + "login = '" + usuario + "'and senha = md5('" + senha+"')";
 
@@ -71,5 +71,29 @@ public class UsuarioDAO implements IDAO_T<Usuario> {
             System.out.println("Erro consultar produto = " + e);
         }
         return ok;
+    }
+    public int getPermicao(String usuario, String senha){
+        int permissao = 0;
+        try {
+            Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+
+            String sql = ""
+                    + "select * from usuario "
+                    + "where  "
+                    + "login = '" + usuario + "'and senha = md5('" + senha+"')";
+
+            
+
+            resultadoQ = st.executeQuery(sql);
+
+            if (resultadoQ.next()) {
+                permissao = resultadoQ.getInt("permissao");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro consultar permissao = " + e);
+        }
+        
+        return permissao;
     }
 }
